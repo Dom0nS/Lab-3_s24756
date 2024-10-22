@@ -1,0 +1,40 @@
+name: Data Processing Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  data_processing:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Download the CSV file
+    - name: Download CollegeDistance.csv
+      run: wget https://vincentarelbundock.github.io/Rdatasets/csv/AER/CollegeDistance.csv -O CollegeDistance.csv
+
+    # Step 3: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    # Step 4: Install dependencies from requirements.txt
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    # Step 5: Run data_analysis.py
+    - name: Run data analysis script
+      run: python data_analysis.py
+
+    # Step 6: Run data_prediction.py
+    - name: Run data prediction script
+      run: python data_prediction.py
