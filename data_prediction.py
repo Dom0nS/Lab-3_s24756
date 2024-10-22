@@ -119,7 +119,7 @@ param_grid = {
     'bootstrap': [True, False]
 }
 
-# Użyj GridSearchCV lub RandomizedSearchCV do tuningu hiperparametrów
+# Użycie GridSearchCV do tuningu hiperparametrów
 grid_search = GridSearchCV(estimator=rf_base, param_grid=param_grid, 
                            cv=5, n_jobs=-1, verbose=2, scoring='neg_mean_squared_error')
 
